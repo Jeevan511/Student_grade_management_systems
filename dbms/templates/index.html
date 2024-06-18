@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management</title>
+</head>
+<body>
+    <h1>Student Management</h1>
+    
+    <h2>Add Student</h2>
+    <form action="/add" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br>
+        <label for="grade">Grade:</label>
+        <input type="text" id="grade" name="grade" required><br>
+        <input type="submit" value="Add Student">
+    </form>
+    
+    <h2>Student List</h2>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Grade</th>
+            <th>Actions</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.age }}</td>
+            <td>{{ student.grade }}</td>
+            <td>
+                <form action="/update/{{ student.id }}" method="post" style="display:inline;">
+                    <input type="text" name="name" value="{{ student.name }}">
+                    <input type="number" name="age" value="{{ student.age }}">
+                    <input type="text" name="grade" value="{{ student.grade }}">
+                    <input type="submit" value="Update">
+                </form>
+                <a href="/delete/{{ student.id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
